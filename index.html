@@ -48,11 +48,49 @@ html { scroll-behavior: smooth; }
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur border-b border-white/10">
   <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-    <img src="images/logo.png" alt="Retensiq" class="h-7">
-    <a href="https://app.retensiq.com/"
-       class="px-4 py-2 rounded-xl bg-white text-slate-950 font-semibold hover:bg-white/90">
-       Login
-    </a>
+    <div class="flex items-center gap-3">
+      <button
+        id="mobile-menu-button"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        class="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 p-2 text-white hover:bg-white/10 md:hidden"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <a href="/" aria-label="Retensiq home">
+        <img src="images/logo.png" alt="Retensiq" class="h-7">
+      </a>
+    </div>
+    <div class="flex items-center gap-3 md:gap-5">
+      <nav class="hidden md:flex items-center gap-5 text-sm text-white/70">
+        <a href="#how" class="hover:text-white">How it works</a>
+        <a href="#compliance" class="hover:text-white">Compliance + LMS</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+      </nav>
+      <a href="https://app.retensiq.com/request-invite"
+         class="hidden md:inline-flex px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-white font-semibold hover:bg-white/10">
+         Request invite
+      </a>
+      <a href="https://app.retensiq.com/"
+         class="px-4 py-2 rounded-xl bg-white text-slate-950 font-semibold hover:bg-white/90">
+         Login
+      </a>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-white/10 md:hidden">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3 text-sm text-white/80">
+      <a href="#how" class="hover:text-white">How it works</a>
+      <a href="#compliance" class="hover:text-white">Compliance + LMS</a>
+      <a href="#faq" class="hover:text-white">FAQ</a>
+      <a href="https://app.retensiq.com/request-invite"
+         class="mt-1 inline-flex w-fit px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-white font-semibold hover:bg-white/10">
+         Request invite
+      </a>
+    </nav>
   </div>
 </header>
 
@@ -79,17 +117,6 @@ Beyond AI detection.
           <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-violet-400"></span>Review-ready outputs that support faster teacher decisions</li>
         </ul>
 
-        <div class="mt-8 hidden flex-wrap gap-3 lg:flex">
-          <a href="#how" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-            See how it works
-          </a>
-          <a href="https://app.retensiq.com/request-invite" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-            Request invite
-          </a>
-          <a href="#faq" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-            FAQ
-          </a>
-        </div>
       </div>
 
       <div class="rounded-3xl border border-white/10 bg-white/5 p-3 shadow-soft">
@@ -98,17 +125,6 @@ Beyond AI detection.
         </div>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-3 lg:hidden">
-        <a href="#how" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-          See how it works
-        </a>
-        <a href="https://app.retensiq.com/request-invite" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-          Request invite
-        </a>
-        <a href="#faq" class="px-6 py-3 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10">
-          FAQ
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -222,6 +238,60 @@ Beyond AI detection.
     </div>
   </div>
 </section>
+
+<!-- Compliance + Integration -->
+<section id="compliance" class="py-24 border-t border-white/10">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Built for school policy and classroom realities</h2>
+      <p class="mt-4 text-white/70 text-lg leading-relaxed">
+        Retensiq is designed for FERPA-aware workflows, diverse learner needs, and practical LMS adoption.
+        Schools stay in control of implementation choices and policy alignment.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3 items-stretch">
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+        <div class="text-xs text-white/60">Data handling</div>
+        <h3 class="mt-2 text-xl font-semibold">FERPA-aware by design</h3>
+        <p class="mt-3 text-sm text-white/70 leading-relaxed">
+          Built to support education privacy expectations by limiting unnecessary student-data exposure and keeping
+          teacher review centered on submission-grounded evidence.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-white/75">
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-emerald-400/80"></span>Workflow patterns that align with district policy decisions</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-blue-400/80"></span>Data use scoped to assessment and instructional review context</li>
+        </ul>
+      </article>
+
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+        <div class="text-xs text-white/60">Instructional access</div>
+        <h3 class="mt-2 text-xl font-semibold">ESL and IEP-friendly flexibility</h3>
+        <p class="mt-3 text-sm text-white/70 leading-relaxed">
+          Teachers can adapt delivery to student context with text or voice response modes, short assessment length,
+          and pacing choices that support multilingual learners and students with accommodations.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-white/75">
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-violet-400/80"></span>Mode flexibility for language expression and communication needs</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-white/60"></span>Teacher-controlled use alongside existing support plans</li>
+        </ul>
+      </article>
+
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+        <div class="text-xs text-white/60">Platform fit</div>
+        <h3 class="mt-2 text-xl font-semibold">LTI LMS integration support</h3>
+        <p class="mt-3 text-sm text-white/70 leading-relaxed">
+          Retensiq supports LTI-based integration workflows so institutions can fit comprehension checks into
+          established LMS processes and adoption plans.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-white/75">
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-emerald-400/80"></span>Works with common LMS-centered teaching operations</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-blue-400/80"></span>Implementation coordinated to local technical requirements</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
 <!-- FAQ -->
 <section id="faq" class="py-24 border-t border-white/10">
   <div class="max-w-3xl mx-auto px-4">
@@ -246,6 +316,18 @@ Beyond AI detection.
         </summary>
         <p class="mt-4 text-white/70 text-sm leading-relaxed">
           Retensiq focuses on comprehension and retention, using submission-grounded questions plus lightweight timing and fluency signals.
+        </p>
+      </details>
+
+      <details class="bg-white/5 border border-white/10 rounded-3xl p-6 group">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">
+          Does Retensiq support FERPA, student accommodations, and LMS workflows?
+          <span class="group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-white/70 text-sm leading-relaxed">
+          Retensiq is designed for FERPA-aware educational workflows, supports flexible response modes that can fit
+          ESL and IEP-informed instructional practice, and can be deployed in LTI-based LMS integration workflows.
+          Schools and districts determine policy and implementation specifics.
         </p>
       </details>
 
@@ -282,6 +364,17 @@ Beyond AI detection.
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuButton && mobileMenu) {
+  mobileMenuButton.addEventListener('click', () => {
+    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+    mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu.classList.toggle('hidden');
+  });
+}
 </script>
 
 </body>
