@@ -42,7 +42,7 @@
 <body class="bg-slate-950 text-white font-sans">
   <div class="min-h-screen bg-transparent py-8 px-4 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
     <article class="mx-auto max-w-3xl rounded-lg border border-white/10 bg-surface px-4 py-6 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
-      <a href="/" class="inline-flex items-center gap-2 text-sm text-muted hover:text-navy-800 transition-colors mb-8">
+      <a href="/" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }" class="inline-flex items-center gap-2 text-sm text-muted hover:text-navy-800 transition-colors mb-8">
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
         </svg>
