@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Security | Retensiq</title>
+  <meta name="description" content="Retensiq security overview for educators, districts, and procurement reviewers." />
+  <link rel="canonical" href="https://retensiq.com/security" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Retensiq" />
+  <meta property="og:title" content="Security | Retensiq" />
+  <meta property="og:description" content="How Retensiq protects educator accounts, student data, and platform infrastructure." />
+  <meta property="og:url" content="https://retensiq.com/security" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Security | Retensiq" />
+  <meta name="twitter:description" content="How Retensiq protects educator accounts, student data, and platform infrastructure." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: "#FFFFFF",
+            muted: "#6B7280",
+            navy: {
+              700: "#2A3A4C",
+              800: "#1E2A38"
+            },
+            gold: {
+              700: "#6D28D9"
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-slate-950 text-white font-sans">
+  <div class="relative min-h-screen overflow-hidden">
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-transparent"></div>
+    <div class="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-400/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-violet-400/20 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <a href="/" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }" class="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors mb-6">
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+        </svg>
+        Back
+      </a>
+
+      <section class="rounded-3xl border border-white/15 bg-white/[0.04] backdrop-blur-sm p-6 sm:p-8 lg:p-10">
+        <p class="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90">
+          Security Overview
+        </p>
+        <h1 class="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight text-white">Security at Retensiq</h1>
+        <p class="mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-white/80">
+          This page summarizes the controls and practices Retensiq uses to protect educator accounts, student information, and platform operations.
+          It is designed for educators, district teams, and procurement reviewers who need clear, practical security information.
+        </p>
+      </section>
+
+      <article class="mt-8 rounded-3xl border border-white/10 bg-surface px-4 py-6 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+        <div class="space-y-6 text-sm leading-relaxed text-navy-700">
+          <section class="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+            <h2 class="text-base font-semibold text-navy-800">1. Identity and Account Protection</h2>
+            <p>Retensiq applies layered account protections to reduce unauthorized access risk for educator and administrator accounts.</p>
+            <ul class="list-disc space-y-1 pl-6">
+              <li>Secure password hashing for email/password authentication</li>
+              <li>Google OAuth sign-in support</li>
+              <li>Email verification before full account access</li>
+              <li>Multi-factor authentication using TOTP</li>
+              <li>Single-use MFA recovery codes</li>
+              <li>Role-based access controls for educators, administrators, and districts</li>
+              <li>Secure session cookies and session invalidation after password changes</li>
+              <li>Targeted rate limiting on authentication endpoints</li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 p-5">
+            <h2 class="text-base font-semibold text-navy-800">2. Application Protection</h2>
+            <p>Assessment workflows are protected with controls that help prevent misuse and preserve educator-directed decisions.</p>
+            <ul class="list-disc space-y-1 pl-6">
+              <li>File upload restrictions with supported format allowlists and size limits</li>
+              <li>Validation of assessment session token states (invalid, expired, or completed)</li>
+              <li>Controlled retake workflows managed by educators</li>
+              <li>Audit logging for authentication and other security-sensitive events</li>
+              <li>Automated tests that cover common abuse paths, including unauthorized access attempts</li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+            <h2 class="text-base font-semibold text-navy-800">3. Data Stewardship and Privacy</h2>
+            <p>Retensiq follows a minimal-data approach and privacy-conscious architecture to limit exposure of student information.</p>
+            <ul class="list-disc space-y-1 pl-6">
+              <li>Sensitive authentication artifacts protected with encryption and hashing at rest</li>
+              <li>Student participation workflows that do not require full student accounts</li>
+              <li>Privacy-aware document ingestion pipeline with redaction stages</li>
+              <li>Data Processing Agreement acceptance during onboarding</li>
+              <li>Educator-controlled student workflows with minimal data collection by design</li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 p-5">
+            <h2 class="text-base font-semibold text-navy-800">4. Infrastructure Security</h2>
+            <p>Retensiq infrastructure protections focus on secure hosting baselines, visibility, and controlled administrative access.</p>
+            <ul class="list-disc space-y-1 pl-6">
+              <li>AWS-hosted infrastructure</li>
+              <li>Infrastructure logging and monitoring for security-relevant events</li>
+              <li>Web application firewall protections at the edge</li>
+              <li>Encrypted storage volumes</li>
+              <li>Hardened instance configurations and restricted administrative access</li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+            <h2 class="text-base font-semibold text-navy-800">5. Continuous Security Verification</h2>
+            <p>Security checks are built into the development lifecycle so potential issues can be surfaced and addressed early.</p>
+            <ul class="list-disc space-y-1 pl-6">
+              <li>Dependency vulnerability scanning during pull requests</li>
+              <li>Static security analysis in development workflows</li>
+              <li>Secret detection scanning in source repositories</li>
+              <li>Automated vulnerability scanning integrated into CI/CD pipelines for dependencies and infrastructure code</li>
+              <li>Cloud infrastructure posture assessments performed against AWS security best practices</li>
+              <li>Scheduled automated application security scanning to detect common web vulnerabilities</li>
+              <li>Security scan results reviewed as part of the platform security governance process</li>
+              <li>Defined security review cadence as part of development operations</li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 p-5">
+            <h2 class="text-base font-semibold text-navy-800">Related Resources</h2>
+            <ul class="list-disc space-y-1 pl-6">
+              <li><a href="/legal/privacy" class="text-gold-700 hover:underline">Privacy Policy</a></li>
+              <li><a href="/legal/terms" class="text-gold-700 hover:underline">Terms of Use</a></li>
+              <li><a href="/legal/dpa" class="text-gold-700 hover:underline">Data Processing Agreement</a></li>
+              <li><a href="/legal/trust" class="text-gold-700 hover:underline">Trust &amp; Safety</a></li>
+            </ul>
+          </section>
+
+          <section class="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+            <p class="text-navy-700">
+              Security is an ongoing process. Retensiq continuously improves platform protections as part of our secure development lifecycle.
+            </p>
+          </section>
+        </div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>
