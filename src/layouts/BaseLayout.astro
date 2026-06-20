@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import GetStartedModal from '../components/GetStartedModal.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -10,15 +8,17 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalUrl?: string;
+  showHeader?: boolean;
   /** Page-specific JSON-LD structured data object(s) */
   jsonLd?: object | object[];
 }
 
 const {
   title,
-  description = 'A platform for developing, validating, and defending genuine understanding.',
+  description = 'An education platform designed around student understanding, teacher awareness, and meaningful parent engagement.',
   ogImage = 'https://retensiq.com/images/hero.png',
   canonicalUrl,
+  showHeader = true,
   jsonLd,
 } = Astro.props;
 
@@ -37,7 +37,7 @@ if (currentPath === '/') {
       name: 'Retensiq',
       url: 'https://retensiq.com',
       logo: 'https://retensiq.com/images/logo.png',
-      description: 'A platform for developing, validating, and defending genuine understanding.',
+      description: 'An education platform designed around student understanding, teacher awareness, and meaningful parent engagement.',
       sameAs: [],
     },
     {
@@ -108,11 +108,9 @@ const allSchema: object[] = [
     ))}
   </head>
   <body>
-    <Header currentPath={currentPath} />
+    {showHeader && <Header currentPath={currentPath} />}
     <main>
       <slot />
     </main>
-    <Footer />
-    <GetStartedModal />
   </body>
 </html>
