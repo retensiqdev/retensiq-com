@@ -1,0 +1,164 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navLinks = [
+  { href: '/assess', label: 'Assess' },
+  { href: '/prep', label: 'Prep' },
+  { href: '/platform', label: 'Platform' },
+  { href: '/security', label: 'Security' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-site mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+
+    <!-- Left: hamburger + logo -->
+    <div class="flex items-center gap-3">
+      <button
+        id="mobile-menu-button"
+        type="button"
+        aria-label="Open menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        class="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 p-2 text-white hover:bg-white/10 transition-colors md:hidden min-h-[44px] min-w-[44px]"
+      >
+        <svg id="hamburger-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <a href="/" aria-label="Retensiq home" class="flex-shrink-0">
+        <img src="/images/logo.png" alt="Retensiq" class="h-7" width="120" height="28" />
+      </a>
+    </div>
+
+    <!-- Right: desktop nav + CTAs -->
+    <div class="flex items-center gap-3 md:gap-6">
+      <nav class="hidden md:flex items-center gap-6 text-body-sm text-white/70" aria-label="Main navigation">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={[
+              'hover:text-white transition-colors',
+              isActive(href) ? 'text-white font-medium' : '',
+            ]}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <button
+        id="get-started-button"
+        type="button"
+        class="hidden md:inline-flex px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-white text-body-sm font-semibold hover:bg-white/10 transition-colors min-h-[40px]"
+      >
+        Get Started
+      </button>
+
+      <a
+        href="https://app.retensiq.com/"
+        rel="noopener noreferrer"
+        class="px-4 py-2 rounded-xl bg-white text-slate-950 text-body-sm font-semibold hover:bg-white/90 transition-colors min-h-[40px] flex items-center"
+      >
+        Login
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="hidden border-t border-white/10 md:hidden">
+    <nav class="max-w-site mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[
+            'mobile-nav-link px-3 py-3 rounded-xl text-body-sm hover:bg-white/5 transition-colors min-h-[44px] flex items-center',
+            isActive(href) ? 'text-white font-medium' : 'text-white/80',
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+
+      <div class="mt-3 pt-3 border-t border-white/10 flex flex-col gap-2">
+        <button
+          id="mobile-get-started-button"
+          type="button"
+          class="px-4 py-3 rounded-xl border border-white/20 bg-white/5 text-white text-body-sm font-semibold hover:bg-white/10 transition-colors text-left min-h-[44px]"
+        >
+          Get Started
+        </button>
+        <a
+          href="https://app.retensiq.com/"
+          rel="noopener noreferrer"
+          class="px-4 py-3 rounded-xl bg-white text-slate-950 text-body-sm font-semibold hover:bg-white/90 transition-colors text-center min-h-[44px] flex items-center justify-center"
+        >
+          Login
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.add('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    hamburgerIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+  }
+
+  function openMobileMenu() {
+    mobileMenu?.classList.remove('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'true');
+    hamburgerIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+  }
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      isExpanded ? closeMobileMenu() : openMobileMenu();
+    });
+  }
+
+  // Close menu when any nav link is clicked (navigation happens)
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Wire mobile "Get Started" to open modal
+  const mobileGetStartedButton = document.getElementById('mobile-get-started-button');
+  if (mobileGetStartedButton) {
+    mobileGetStartedButton.addEventListener('click', () => {
+      closeMobileMenu();
+      document.dispatchEvent(new CustomEvent('open-get-started'));
+    });
+  }
+
+  // Wire desktop "Get Started" to open modal
+  const getStartedButton = document.getElementById('get-started-button');
+  if (getStartedButton) {
+    getStartedButton.addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('open-get-started'));
+    });
+  }
+</script>

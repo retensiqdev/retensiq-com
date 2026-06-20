@@ -1,0 +1,58 @@
+---
+/**
+ * FeatureCard — icon dot + label + description card for feature grids
+ *
+ * Props:
+ *   label       — card heading
+ *   description — card body text
+ *   dotColor    — Tailwind bg class for the indicator dot (default 'bg-white/40')
+ *   accent      — 'assess' | 'prep' | 'neutral' for border/bg tinting
+ *   detail      — optional small secondary label (e.g. for trust cards)
+ *   detailColor — Tailwind color class for detail text
+ *   dense       — tighter padding (for institutional/Assess pages)
+ */
+interface Props {
+  label: string;
+  description: string;
+  dotColor?: string;
+  accent?: 'assess' | 'prep' | 'neutral';
+  detail?: string;
+  detailColor?: string;
+  dense?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  description,
+  dotColor = 'bg-white/40',
+  accent = 'neutral',
+  detail,
+  detailColor = 'text-white/50',
+  dense = false,
+  class: className = '',
+} = Astro.props;
+
+const accentMap = {
+  assess: 'border-white/12 bg-white/[0.04]',
+  prep:   'border-white/8  bg-white/[0.03]',
+  neutral: 'border-white/10 bg-white/5',
+};
+---
+
+<div
+  class:list={[
+    'rounded-2xl border shadow-card',
+    dense ? 'p-5' : 'p-6',
+    accentMap[accent],
+    className,
+  ]}
+>
+  <div class:list={['h-2 w-2 rounded-full mb-4', dotColor]}></div>
+  <h3 class="text-body-sm font-semibold text-white mb-1.5">{label}</h3>
+  {detail && (
+    <p class:list={['text-caption font-semibold mb-2.5', detailColor]}>{detail}</p>
+  )}
+  <p class="text-body-sm text-white/55 leading-relaxed">{description}</p>
+  <slot />
+</div>

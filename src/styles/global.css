@@ -1,0 +1,90 @@
+/* Inter Variable font */
+@import '@fontsource-variable/inter';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets ──────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-white font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Anchor scroll offset for sticky header */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Touch target minimum for interactive elements */
+  button, [role="button"] {
+    min-height: 2.75rem;
+  }
+}
+
+/* ── Reduced-motion support ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Marketing utility layer ─────────────────────────────────────────────── */
+@layer utilities {
+  /* Section vertical rhythm */
+  .section-padding {
+    @apply py-24;
+  }
+  .section-padding-lg {
+    @apply py-24 md:py-32;
+  }
+
+  /* Content max-width containers */
+  .site-container {
+    @apply max-w-site mx-auto px-4 sm:px-6;
+  }
+
+  /* Eyebrow text style — matches text-eyebrow fontSize token */
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* Assess product accent */
+  .assess-accent {
+    @apply text-blue-300/70;
+  }
+  .assess-border {
+    @apply border-blue-300/20;
+  }
+  .assess-bg {
+    @apply bg-blue-500/5;
+  }
+
+  /* Prep product accent */
+  .prep-accent {
+    @apply text-emerald-300/70;
+  }
+  .prep-border {
+    @apply border-emerald-300/20;
+  }
+  .prep-bg {
+    @apply bg-emerald-500/5;
+  }
+}

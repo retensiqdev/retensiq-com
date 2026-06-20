@@ -1,0 +1,48 @@
+---
+/**
+ * SectionHeading — eyebrow + h2 + optional subheading
+ *
+ * Props:
+ *   eyebrow   — small uppercase label above the heading
+ *   heading   — main h2 text
+ *   subheading — body text below the heading
+ *   maxWidth  — Tailwind max-width class (default max-w-prose-lg)
+ *   center    — center-align text (default false)
+ *   eyebrowColor — Tailwind color class for eyebrow (default text-white/40)
+ */
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  subheading?: string;
+  class?: string;
+  maxWidth?: string;
+  center?: boolean;
+  eyebrowColor?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  subheading,
+  class: className = '',
+  maxWidth = 'max-w-prose-lg',
+  center = false,
+  eyebrowColor = 'text-white/40',
+} = Astro.props;
+---
+
+<div class:list={[maxWidth, center ? 'mx-auto text-center' : '', className]}>
+  {eyebrow && (
+    <p class:list={['text-eyebrow uppercase tracking-[0.1em] font-semibold mb-3', eyebrowColor]}>
+      {eyebrow}
+    </p>
+  )}
+  <h2 class="text-section-title font-semibold tracking-tight text-white">
+    {heading}
+  </h2>
+  {subheading && (
+    <p class="mt-4 text-body-lg text-white/65 leading-relaxed">
+      {subheading}
+    </p>
+  )}
+</div>

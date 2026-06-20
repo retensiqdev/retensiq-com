@@ -1,0 +1,78 @@
+---
+/**
+ * CTABlock — end-of-section or end-of-page conversion card
+ *
+ * Props:
+ *   eyebrow       — small label above the heading
+ *   heading       — main CTA heading
+ *   subheading    — supporting body text
+ *   accent        — 'assess' | 'prep' | 'neutral' (default 'neutral')
+ *   center        — center-align content (default true)
+ */
+import CTAButton from './CTAButton.astro';
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  subheading?: string;
+  accent?: 'assess' | 'prep' | 'neutral';
+  center?: boolean;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  subheading,
+  accent = 'neutral',
+  center = true,
+  class: className = '',
+} = Astro.props;
+
+const accentMap = {
+  assess: {
+    border: 'border-blue-300/20',
+    bg: 'bg-blue-500/5',
+    eyebrowColor: 'text-blue-300/60',
+  },
+  prep: {
+    border: 'border-emerald-300/20',
+    bg: 'bg-emerald-500/5',
+    eyebrowColor: 'text-emerald-300/60',
+  },
+  neutral: {
+    border: 'border-white/10',
+    bg: 'bg-white/5',
+    eyebrowColor: 'text-white/40',
+  },
+};
+
+const { border, bg, eyebrowColor } = accentMap[accent];
+---
+
+<div
+  class:list={[
+    'rounded-3xl border p-10 md:p-14 shadow-soft',
+    border,
+    bg,
+    center ? 'text-center' : '',
+    className,
+  ]}
+>
+  {eyebrow && (
+    <p class:list={['text-eyebrow uppercase tracking-[0.1em] font-semibold mb-4', eyebrowColor]}>
+      {eyebrow}
+    </p>
+  )}
+  <h2 class="text-section-title font-semibold tracking-tight text-white">
+    {heading}
+  </h2>
+  {subheading && (
+    <p class:list={['mt-4 text-body-lg text-white/60 leading-relaxed mx-auto', center ? 'max-w-prose' : '']}>
+      {subheading}
+    </p>
+  )}
+  <div class:list={['mt-8', center ? 'flex flex-col sm:flex-row items-center justify-center gap-3' : 'flex flex-wrap gap-3']}>
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import GetStartedModal from '../components/GetStartedModal.astro';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  /** Page-specific JSON-LD structured data object(s) */
+  jsonLd?: object | object[];
+}
+
+const {
+  title,
+  description = 'A platform for developing, validating, and defending genuine understanding.',
+  ogImage = 'https://retensiq.com/images/hero.png',
+  canonicalUrl,
+  jsonLd,
+} = Astro.props;
+
+const currentPath = new URL(Astro.request.url).pathname;
+const canonical = canonicalUrl ?? `https://retensiq.com${currentPath}`;
+const fullTitle = title === 'Retensiq' ? 'Retensiq' : `${title} | Retensiq`;
+
+// Build JSON-LD array — always include base Organization + WebSite on homepage
+const baseSchema: object[] = [];
+
+if (currentPath === '/') {
+  baseSchema.push(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Retensiq',
+      url: 'https://retensiq.com',
+      logo: 'https://retensiq.com/images/logo.png',
+      description: 'A platform for developing, validating, and defending genuine understanding.',
+      sameAs: [],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Retensiq',
+      url: 'https://retensiq.com',
+    },
+  );
+}
+
+// Always include WebPage
+baseSchema.push({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: fullTitle,
+  description,
+  url: canonical,
+});
+
+// Merge page-specific JSON-LD
+const allSchema: object[] = [
+  ...baseSchema,
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Primary meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Retensiq" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- View Transitions for smooth page navigation -->
+    <ClientRouter />
+
+    <!-- JSON-LD structured data -->
+    {allSchema.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body>
+    <Header currentPath={currentPath} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <GetStartedModal />
+  </body>
+</html>

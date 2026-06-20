@@ -1,0 +1,40 @@
+---
+/**
+ * Section — marketing section wrapper
+ *
+ * Props:
+ *   id        — anchor id
+ *   border    — show top border (default true)
+ *   padded    — apply vertical padding (default true)
+ *   tight     — reduced vertical padding (for denser institutional pages)
+ *   class     — additional classes on the outer <section>
+ */
+interface Props {
+  id?: string;
+  class?: string;
+  border?: boolean;
+  padded?: boolean;
+  tight?: boolean;
+}
+
+const {
+  id,
+  class: className = '',
+  border = true,
+  padded = true,
+  tight = false,
+} = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    padded ? (tight ? 'py-16 md:py-20' : 'py-20 md:py-28') : '',
+    border ? 'border-t border-white/10' : '',
+    className,
+  ]}
+>
+  <div class="max-w-site mx-auto px-4 sm:px-6">
+    <slot />
+  </div>
+</section>

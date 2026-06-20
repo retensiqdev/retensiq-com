@@ -1,0 +1,41 @@
+---
+type Accent = 'emerald' | 'violet' | 'blue' | 'white';
+
+interface Props {
+  accent?: Accent;
+  class?: string;
+  href?: string;
+}
+
+const { accent = 'white', class: className = '', href } = Astro.props;
+
+const accentClasses: Record<Accent, string> = {
+  emerald: 'border-emerald-300/30 bg-gradient-to-b from-emerald-500/15 to-transparent',
+  violet: 'border-violet-300/30 bg-gradient-to-b from-violet-500/15 to-transparent',
+  blue: 'border-blue-300/30 bg-gradient-to-b from-blue-500/15 to-transparent',
+  white: 'border-white/10 bg-white/5',
+};
+---
+
+{href ? (
+  <a
+    href={href}
+    class:list={[
+      'block rounded-3xl border p-6 shadow-soft transition-all hover:scale-[1.01]',
+      accentClasses[accent],
+      className,
+    ]}
+  >
+    <slot />
+  </a>
+) : (
+  <div
+    class:list={[
+      'rounded-3xl border p-6 shadow-soft',
+      accentClasses[accent],
+      className,
+    ]}
+  >
+    <slot />
+  </div>
+)}

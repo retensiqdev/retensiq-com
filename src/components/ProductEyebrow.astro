@@ -1,0 +1,26 @@
+---
+/**
+ * ProductEyebrow — "Retensiq · Assess" or "Retensiq · Prep" brand label
+ *
+ * Props:
+ *   product — 'assess' | 'prep'
+ */
+interface Props {
+  product: 'assess' | 'prep';
+}
+
+const { product } = Astro.props;
+
+const productMap = {
+  assess: { label: 'Assess', color: 'text-blue-300/70' },
+  prep:   { label: 'Prep',   color: 'text-emerald-300/70' },
+};
+
+const { label, color } = productMap[product];
+---
+
+<div class="flex items-center gap-2 mb-6">
+  <span class:list={['text-eyebrow uppercase tracking-[0.1em] font-semibold', color]}>Retensiq</span>
+  <span class="text-caption text-white/25">·</span>
+  <span class="text-eyebrow uppercase tracking-[0.1em] font-semibold text-white/40">{label}</span>
+</div>
